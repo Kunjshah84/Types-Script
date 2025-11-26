@@ -100,8 +100,42 @@ interface usersInterface{
 class usersclass implements usersInterface{
     private firstName : string;
     private lastName : string;
+    static readonly maxAge=50;
+
+    constructor(firstName:string , lastName:string){
+        this.firstName="kunj";
+        this.lastName="shah";
+    }
+
     getFullName(): string {
         return this.firstName + " " + this.lastName;
     }
 }
 // This class should implement the getFullName method:
+// And yes we can have some of the static property:
+// That is only accesseble by only the class name 
+
+
+// just inheriting the usersclass
+class Admin extends usersclass{
+    
+}
+
+// Now yes we are able to use the constructure and able to add more functions:
+
+// Generdics in TS:
+
+// Dis continued that course
+
+
+// Traying the odd behaviour:
+
+function cretaeUser({name:string , ispaid:boolean}) {}
+
+const nweUser={
+    name:"kunj",
+    email:"kunjshah",
+    ispaid:true
+}
+
+cretaeUser(nweUser);
