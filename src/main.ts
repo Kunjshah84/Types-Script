@@ -139,3 +139,68 @@ const nweUser={
 }
 
 cretaeUser(nweUser);
+
+
+// This is the practice of then generics:
+
+function getSomethingFromTheDb<T> (products : T[]) : T{
+    // Some operation inside the DB
+    const newInd=3;
+    return products[3];
+}
+
+// Now hot to convert this into the arrow function?
+const getMoreProduct = <T> (products : T[] ) : T  => {
+    return products[3];
+} 
+
+// What are the genrics constrain?
+// If we want that we are having the 2 data Types inside the function then we are able to do that
+
+function tryConstrain<T extends {name : string},U>(params1 : T , parms2 : U) : T { 
+    return params1;
+}
+
+tryConstrain({name : "kunj" , age : 21},[1,2,3]);
+
+
+// class type inside the generics:
+
+
+// This is the classic example why we have to use the Descimennted union
+
+interface cir {
+    kind : "cir";
+    radius : number
+} 
+
+interface sq {
+    kind : "sq";
+    side: number
+}
+
+type shape = cir | sq ;
+// Doing the type norrowing by the old check method:
+function getTheArea(obj : shape) : string{
+    if(obj.kind === "cir")  return "Calculating the shape for the cir"
+    return "calculating the shape for the sq";
+}
+
+// but here we have an problem like if in future some of the method added inside the payment gate
+// Way then the code is gonna break because we have righten that new part inside the return stament
+
+// But here we can do more batter with the descimenent narrowing:
+
+// So i side the switch we are going to right the never that is going to make sure to right
+// The never case which is handy for the sitution like that:
+
+
+function getArea(obj: shape) : string{
+    switch(obj.kind){
+        case "cir": return "calculatiing the area of the cir";
+        case "sq" : return "calculating the area of the sq";
+        default : 
+            const  _defultvar : never = obj;
+            return _defultvar;
+    }
+}
